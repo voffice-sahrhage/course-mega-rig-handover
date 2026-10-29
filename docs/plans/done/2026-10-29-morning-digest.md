@@ -1,8 +1,9 @@
 ---
 plan: morning-digest
-status: ready
+status: done
 owner: rook
 opened: 2026-10-29
+closed: 2026-10-29
 ---
 
 # Morning digest
@@ -77,3 +78,22 @@ page again with `LANE_MARKER` unset (the banner reads "no marker set") and uploa
 link. Move this plan to `docs/plans/done/` with its issue list.
 
 Done when: the preview link no longer shows the lane marker.
+
+## Issues
+
+| # | Issue | Blocked by | Worker | Closed |
+|---|-------|-----------|--------|--------|
+| 1 | Digest types: DigestRow and readNight signature | — | claude-code · opus-5.5 · high | 2026-10-29 |
+| 2 | Run log reader for runs/<night>.jsonl | #1 | claude-code · opus-5.5 · high | 2026-10-29 |
+| 3 | Digest page: GET /digest/:night | #1, #2 | claude-code · sonnet-5.5 · default | 2026-10-29 |
+| 4 | Digest JSON: GET /api/digest/:night | #1, #2 | claude-code · sonnet-5.5 · default | 2026-10-29 |
+| 5 | Status board: link each night to its digest with counts | #1, #2 | claude-code · sonnet-5.5 · default | 2026-10-29 |
+| 6 | Route tests for /digest and /api/digest | #3, #4 | claude-code · sonnet-5.5 · default | 2026-10-29 |
+| 7 | Preview for review: public link to /digest/2026-10-28 | #3 | claude-code · opus-5.5 · high | 2026-10-29 |
+| 8 | Clean up: take the lane marker off the preview, close the plan | #7, review | claude-code · opus-5.5 · high | 2026-10-29 |
+
+§ 1 was split in two (#1 types, #2 reader) so § 2 could start against the types. #5's counts were
+changed at merge to count a job as retry when it retried and did not end failed. #7 was closed
+when the link was sent and reopened until the reviewer had looked. The preview is built by
+`.github/workflows/preview.yml` on GitHub Pages and never committed; the marker came from a repo
+secret, deleted for the clean-up.
